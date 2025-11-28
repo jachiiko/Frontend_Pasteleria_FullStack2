@@ -1,68 +1,424 @@
+/*
+  Estilos globales para Pastelería 1000 Sabores.
+
+  Definimos variables CSS para los colores base de la marca y configuramos
+  tipografías y estilos genéricos. Estos estilos pretenden aproximar la
+  apariencia pastel mostrada en el sitio HTML original: fondos beige,
+  encabezados en marrón con una tipografía manuscrita y acentos en rosa.
+*/
+
 :root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
+  --color-bg: #fdf1e6;
+  --color-pink: #f9c2d3;
+  --color-pink-hover: #f5a6bb;
+  --color-brown: #7a3d21;
+  --color-white: #ffffff;
+  --color-border: #f3d7de;
+  --color-gray: #eae2d8;
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  background-color: var(--color-bg);
+  font-family: 'Poppins', sans-serif;
+  color: #4d3b32;
+  min-height: 100%;
+}
+
+/* Aplicamos la tipografía manuscrita a todos los títulos por defecto */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: 'Pacifico', cursive;
+  color: var(--color-brown);
   font-weight: 400;
-
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
-
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
 }
 
 a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
+  text-decoration: none;
+  color: inherit;
 }
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
-
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
-}
-
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
+/* Botones base utilizados en toda la aplicación. Se extienden mediante clases adicionales. */
+.btn {
+  display: inline-block;
+  padding: 0.5rem 1rem;
+  border-radius: 0.5rem;
+  border: none;
   cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
+  font-weight: 600;
+  transition: background-color 0.15s ease-in-out, transform 0.05s;
 }
 
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+.btn-primary {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+}
+.btn-primary:hover {
+  background-color: var(--color-pink-hover);
+}
+.btn-primary:active {
+  transform: translateY(1px);
+}
+
+/* Contenedor general para secciones; limita el ancho y centra el contenido */
+.container {
+  width: min(1200px, 92%);
+  margin: 0 auto;
+  padding: 1.5rem 0;
+}
+
+/* Tarjeta genérica para agrupar contenidos con borde y sombra suave */
+.card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+  padding: 1rem;
+}
+
+/* Tabla simple para el panel de administración */
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+th,
+td {
+  padding: 0.5rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--color-border);
+}
+th {
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  font-weight: 600;
+}
+
+/* Oculta el tick de la lista para inputs number en Firefox/Chrome */
+input[type='number']::-webkit-outer-spin-button,
+input[type='number']::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+input[type='number'] {
+  -moz-appearance: textfield;
+}
+
+/* Estilo base para campos de texto y selects */
+.field {
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  margin-bottom: 1rem;
+}
+
+.field input,
+.field select,
+.field textarea {
+  padding: 0.5rem;
+  border: 1px solid var(--color-border);
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-family: inherit;
+}
+
+.field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+
+/* Encabezados de formulario */
+.field label {
+  font-weight: 600;
+  color: var(--color-brown);
+}
+
+/* Barra de navegación general. Aplicamos estilo sticky en componentes específicos. */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  border-bottom: 2px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+
+.navbar .logo {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.navbar nav {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  flex-wrap: wrap;
+  font-weight: 500;
+}
+
+.navbar a {
+  color: var(--color-white);
+  padding: 0.5rem 0.75rem;
+  border-radius: 0.5rem;
+  transition: background-color 0.15s;
+}
+.navbar a.active {
+  background-color: var(--color-pink-hover);
+}
+.navbar a:hover {
+  background-color: var(--color-pink-hover);
+}
+
+/* Badge para indicador del carrito */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  height: 1.25rem;
+  padding: 0 0.25rem;
+  background-color: var(--color-white);
+  color: var(--color-pink);
+  border-radius: 50%;
+  font-size: 0.75rem;
+  font-weight: 700;
+}
+
+/* Pie de página */
+.footer {
+  margin-top: 2rem;
+  padding: 1rem 0;
+  text-align: center;
+  background-color: var(--color-gray);
+  font-size: 0.875rem;
+  color: #6c584c;
+}
+
+/* Diseño de grilla para las tarjetas de productos */
+.product-grid {
+  display: grid;
+  gap: 1rem;
+  grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+}
+
+/* Tarjeta de producto */
+.product-card {
+  display: flex;
+  flex-direction: column;
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.03);
+  height: 100%;
+}
+.product-card img {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+}
+.product-card-content {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+  padding: 0.75rem;
+}
+.product-card-category {
+  font-size: 0.7rem;
+  text-transform: uppercase;
+  color: #8c5a3e;
+  margin-bottom: 0.25rem;
+  letter-spacing: 0.5px;
+}
+.product-card-name {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.1rem;
+  color: var(--color-brown);
+  margin-bottom: 0.5rem;
+}
+.product-card-price {
+  font-weight: 700;
+  color: var(--color-brown);
+  margin-bottom: 0.5rem;
+}
+.product-card .add-btn {
+  margin-top: auto;
+}
+
+/* Tarjeta de blog */
+.blog-card {
+  background-color: var(--color-white);
+  border: 1px solid var(--color-border);
+  border-radius: 0.75rem;
+  overflow: hidden;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+.blog-card img {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+}
+.blog-card-content {
+  padding: 1rem;
+}
+.blog-card-title {
+  font-family: 'Pacifico', cursive;
+  font-size: 1.3rem;
+  color: var(--color-brown);
+  margin-bottom: 0.5rem;
+}
+.blog-card-description {
+  color: #4d3b32;
+  line-height: 1.4;
+}
+
+/* Responsive: ajustar la barra de navegación en pantallas pequeñas */
+@media (max-width: 768px) {
+  .navbar nav {
+    gap: 0.5rem;
   }
-  a:hover {
-    color: #747bff;
+  .product-grid {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
   }
-  button {
-    background-color: #f9f9f9;
+}
+
+
+/*aqui voy a poner todo el tema del css de algunos de los componentes para que sean responsivos */
+
+/* Layout básico (respeta tu .container original de arriba) */
+img { max-width: 100%; height: auto; }
+
+/* NAVBAR: mantiene el fondo rosa de marca y mejora mobile */
+.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  padding: 0.75rem 1rem;
+  background-color: var(--color-pink);
+  color: var(--color-white);
+  border-bottom: 2px solid var(--color-border);
+  position: sticky;
+  top: 0;
+  z-index: 10;
+}
+.navbar .logo { display: inline-flex; align-items: center; gap: .5rem; font-weight: 700; font-size: 1.2rem; }
+.navbar .logo img { width: 24px; height: 24px; display: block; }
+
+.navbar nav { display: flex; flex-wrap: wrap; gap: .75rem; align-items: center; font-weight: 500; }
+.navbar a { color: var(--color-white); padding: .5rem .75rem; border-radius: .5rem; transition: background-color .15s; }
+.navbar a.active,
+.navbar a:hover { background-color: var(--color-pink-hover); }
+
+/* Badge carrito (ya usas esta clase en blanco con texto rosa) */
+.badge {
+  display: inline-flex; align-items: center; justify-content: center;
+  min-width: 1.25rem; height: 1.25rem; padding: 0 .25rem;
+  background-color: var(--color-white); color: var(--color-pink);
+  border-radius: 50%; font-size: .75rem; font-weight: 700;
+}
+
+/* Botón hamburguesa para mobile */
+.nav-toggle {
+  display: none;
+  align-items: center; justify-content: center;
+  width: 40px; height: 40px;
+  border: 1px solid var(--color-border);
+  border-radius: .5rem;
+  background: var(--color-white);
+  color: var(--color-brown);
+  font-size: 1rem;
+}
+
+/* Breakpoints */
+@media (max-width: 768px) {
+  .navbar { align-items: center; }
+  .navbar nav {
+    position: absolute; top: calc(56px + 2px); left: 0; right: 0;
+    display: none;
+    flex-direction: column; gap: 0;
+    background: var(--color-pink); /* mantiene color de marca en el dropdown */
+    border-top: 2px solid var(--color-border);
+    padding: .5rem 0;
   }
+  .navbar nav a {
+    width: 100%;
+    padding: 1rem;
+    border-radius: 0;
+    border-bottom: 1px solid rgba(255,255,255,.15);
+  }
+  .navbar nav a:last-child { border-bottom: 0; }
+
+  .nav-toggle { display: inline-flex; }
+  .navbar nav.open { display: flex; }
+}
+
+/* ================== BOTONES (unificados, con contraste correcto) ================== */
+.btn {
+  display: inline-flex; align-items: center; justify-content: center;
+  padding: .5rem .8rem; border-radius: .5rem; border: 1px solid var(--color-border);
+  background: var(--color-white); color: #333; cursor: pointer;
+  font-weight: 600;
+  transition: background-color .15s ease, filter .15s ease, transform .05s ease;
+}
+.btn:hover { background: #f7f7f7; }
+.btn:active { transform: translateY(1px); }
+.btn:disabled { opacity: .6; cursor: not-allowed; }
+
+.btn-primary {
+  background: var(--color-pink);
+  border-color: var(--color-pink);
+  color: var(--color-white);
+}
+.btn-primary:hover {
+  background: var(--color-pink-hover);
+  border-color: var(--color-pink-hover);
+  color: var(--color-white); /* evita “texto invisible” en hover */
+}
+
+.btn-danger {
+  background: #e53935; border-color: #e53935; color: #fff;
+}
+.btn-danger:hover {
+  background: #c62828; border-color: #c62828; color: #fff;
+}
+
+.btn-ghost {
+  background: transparent; border-color: var(--color-border); color: #333;
+}
+.btn-ghost:hover { background: #f5f5f5; }
+
+/* ================== TABLA DEL CARRITO ================== */
+.table-responsive { overflow-x: auto; }
+.table { width: 100%; border-collapse: collapse; }
+.table th, .table td { padding: .75rem; border-bottom: 1px solid var(--color-border); text-align: center; }
+.table thead th { font-weight: 600; color: var(--color-brown); background: var(--color-bg); }
+.cart-item { display: flex; align-items: center; gap: .75rem; text-align: left; }
+.cart-thumb {
+  width: 56px; height: 56px; object-fit: cover; border-radius: .5rem; border: 1px solid var(--color-border);
+  background: var(--color-white);
+}
+.cart-name { font-weight: 600; color: var(--color-brown); }
+.cart-cat { font-size: .85rem; color: #7a6a61; }
+.qty-control { display: inline-flex; align-items: center; gap: .5rem; }
+.qty { display: inline-block; min-width: 2ch; text-align: center; }
+.line-total { font-weight: 700; color: var(--color-brown); }
+
+@media (max-width: 640px) {
+  .cart-thumb { width: 44px; height: 44px; }
+  .qty-control .btn { padding: .35rem .6rem; }
 }
